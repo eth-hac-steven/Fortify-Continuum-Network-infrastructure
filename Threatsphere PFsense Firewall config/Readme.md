@@ -3,7 +3,7 @@
 ##  Prerequisites
   - virtualbox 😃/VM ware ☹️
   - PFsense iso
-  - A windows pc 
+  - A windows pc / kali linux
 
 Please refer to [this](https://github.com/eth-hac-steven/Home-lab-Virtual-Machine-Setup/tree/main/PFsense%20Firewall%20Installation) to install the firewall iso in virtualbox
 
@@ -13,6 +13,8 @@ Please refer to [this](https://github.com/eth-hac-steven/Home-lab-Virtual-Machin
 
 - Start the Machines
 - On PFsense you should see this
-    
+
+   ![ip address](image.png)    
 
 - Take note of the LAN IP address : 192.168.1.1/24
+- On the kali system go t your browser
