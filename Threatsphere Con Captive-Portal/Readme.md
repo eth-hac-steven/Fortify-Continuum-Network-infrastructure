@@ -15,24 +15,24 @@ A Captive portal is an important part of Network access control in an Enterprise
 - click on ```Service```
 - click on ```Captive portal```
 
-![alt text](THcon-Captive-portal-config-pt1.png)
+![alt text](/images/THcon-Captive-portal-config-pt1.png)
 
 - Click on add 
 
-![alt text](THcon-Captive-portal-config-pt2.png)
+![alt text](/images/THcon-Captive-portal-config-pt2.png)
 
 - Enter a Zone name eg Human_Res
 - Enter a Zone Description eg Zone for Human-Res staff
 - click ```save and continue```
 
-![alt text](THcon-Captive-portal-config-pt3(zozne-name).png) 
+![alt text](/images/THcon-Captive-portal-config-pt3(zozne-name).png) 
 
 - check "Enable captive portal"
 - In interface , select "HumanRes"
 
 Pfsense has done a good job in telling us waht each feature does, remember Enterprise enviroment differ so what you are doing should suite yours.
 
-![alt text](THcon-Captive-portal-config-pt3-enabing-interface.png)
+![alt text](/images/THcon-Captive-portal-config-pt3-enabing-interface.png)
 
 - set idle timeout : 30 
 - Check "logout pop-up window"
@@ -48,7 +48,7 @@ Pfsense has done a good job in telling us waht each feature does, remember Enter
 - click on save
 - Repeat for all the VLAN segment
 
-![alt text](THcon-Captive-portal-Zones.png)
+![alt text](/images/THcon-Captive-portal-Zones.png)
 
  ### Creating User account for the different segments
 
@@ -56,23 +56,23 @@ Pfsense has done a good job in telling us waht each feature does, remember Enter
 - click on system
 - click on User Manager
 
-![alt text](THcon-Captive-portal-user-config.png)
+![alt text](/images/THcon-Captive-portal-user-config.png)
 
 First we create groups 
 
 - Click on  ``Groups``
 - click on  ``Add``
 
-![alt text](THcon-Captive-portal-user-config-pt2.png) 
+![alt text](/images/THcon-Captive-portal-user-config-pt2.png) 
 
 - Enter a Group-name
 - Enter a Description
 
-![alt text](THcon-Captive-portal-user-config-pt3.png) 
+![alt text](/images/THcon-Captive-portal-user-config-pt3.png) 
 
 - Do this for all others
 
-![alt text](THcon-Captive-portal-user-config-pt4.png) 
+![alt text](/images/THcon-Captive-portal-user-config-pt4.png) 
 
  Now lets create User account for user in our Enterprise
 - Victoria Dane - Accounting
@@ -87,15 +87,15 @@ First we create groups
 - Enter passwords
 - Enter Fullname
 
-![alt text](THcon-Captive-portal-user-account-creation.png)
+![alt text](/images/THcon-Captive-portal-user-account-creation.png)
 
 
 make sure add the user to be members of the right groups
 
 - By selecting it and clicking on "Move to members list"
 
-![alt text](THcon-Captive-portal-user-account-creation-pt2.png)
+![alt text](/images/THcon-Captive-portal-user-account-creation-pt2.png)
 
 - And repeat for the other users
 
-![alt text](THcon-Captive-portal-user-account-display.png)
+![alt text](/images/THcon-Captive-portal-user-account-display.png)
