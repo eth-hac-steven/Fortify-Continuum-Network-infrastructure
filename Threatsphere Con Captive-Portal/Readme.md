@@ -80,7 +80,7 @@ First we create groups
   - this is important, without this the user accounts created would be denied access and or rejected
 - select User-Service : Captive Portal
 
-![Assiginng privilegedes to the different groups](THcon-Captive-portal-Group-privilegdes.png)
+![Assiginng privilegedes to the different groups](./images/THcon-Captive-portal-Group-privilegdes.png)
 
 - click on Save
 
