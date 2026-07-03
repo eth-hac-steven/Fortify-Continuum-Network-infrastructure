@@ -1,6 +1,6 @@
-# Threatsphere Captive Portal Setup
+# Fortify Continuum Captive Portal Setup
 
-A Captive portal is an important part of Network access control in an Enterprise environment. Users connecting to the network need to authorize with credentials like username and password or vouchers.
+A Captive portal is an important part of Network access control in an Enterprise environment. Users connecting to the network need to authorize with credentials like username and password or voucher codes to access network services.
 
 ---
 ### Prerequisites  
@@ -86,7 +86,7 @@ First we create groups
 
 - Do this for all others
 
-![Multiple user groups displayed in the Groups list](./images/THcon-Captive-portal-user-config-pt4.png) 
+![Multiple user groups displayed in the Groups list](./images/THcon-Captive-portal-user-config-pt4.png)
 
 Now let's create user accounts for users in our Enterprise:
 - Victoria Dane - Accounting
@@ -130,7 +130,7 @@ With all that done you should see this appear in  your browser
 
 ![Captive-portal-after-login](./images/THcon-Captive-portal-after-login.png)
 
-you see the logout pop up windows
+ you see the logout pop up windows
 
  #### Captive portal  Access logs
 
@@ -142,7 +142,3 @@ you see the logout pop up windows
 
 
 ![success-login](./images/success-login.png)  
-
-
-
-
