@@ -1,53 +1,131 @@
-# Fortify Continuum Captive Portal
+# Fortify Continuum Firewall configuration
 
-This folder contains the custom Fortify Continuum captive portal pages used for staff access. The pages are designed with a branded office background, translucent glass-style form panels, and responsive layouts for desktop and mobile.
+##  Prerequisites
+  - virtualbox 😃/VM ware ☹️
+  - A windows pc 
 
-## Files
+Please refer to [this](https://github.com/eth-hac-steven/Home-lab-Virtual-Machine-Setup/tree/main/PFsense%20Firewall%20Installation) to install the firewall iso in virtualbox
 
-- `login.html` — Login page for staff access.
-- `error.html` — Error page showing login or voucher failures.
-- `logout.html` — Logout/connected status page.
-- `images/` — Local image assets used by the portal pages.
-- `Readme.md` — This file.
+### Note 
+- when setting the hostname, avoid uppercases letters
+- If you want to use  your physical system 
+   - change Adapter 2 on the Pfsense VM to Host-only connection
+   - Then follow the step 
+- This allows your physical system to speak directly to the firewall bypassing the need on the Win 11 vm(still recommended though)
 
-## Features
+### PFsense  setup
+- Device Setup
+   - Make sure that the win pc and  PFsense are on the same LAN network 
 
-- Background uses `images/FC-office-img.jpg` for a branded look.
-- Transparent translucent form panel with blur effect.
-- Responsive layout: pages stack for smaller screens and show side-by-side content on desktop.
-- Consistent branding across login, error, and logout flows.
+- Start the Machines
+- On PFsense you should see this
 
-## Notes
+   ![ip address](./images/image.png)    
 
-- The pages currently use inline CSS inside each HTML file.
-- The current file are required for each captive portal zone.
-- The `login.html` form posts to the captive portal authentication endpoint.
-- The `logout.html` page includes logout behavior and a reconnect flow.
+- Take note of the LAN IP address : 192.168.1.1/24
+- On the Win system go to your browser
+- Enter the IP address in the url bar
+- This warning should come up
+  
+![pfsense-config-browser-warning](./images/pfsense-config-browser-warning.png)
 
-## Customization
+- Click ```Advance``` 
+- Click on ```continue to 192.168.1.1```
+- which bring you to the login page
 
-To adapt the portal for another zone or design:
+![(pfsense-config-browser-login](./images/pfsense-config-browser-login.png)
 
-1. Update the background image in `background-image: url('images/FC-office-img.jpg')`.
-2. Change the brand logo path and text inside each HTML file.
-3. Adjust the form action URL in `login.html` and the redirect logic in `logout.html`.
-4. Update colors, spacing, or fonts in the inline `<style>` sections.
+- The username : admin
+- The password : pfsense
 
-## Uploading to pfSense Captive Portal
+Welcome to the Pfsense dashbaord
+![alt text](pfsense-config-wizard.png)
+ 
+like the screenshot says the ```wizard provides guidance through the initial configuration of pfsense```, so
 
-1. Prepare the HTML and image assets locally.
-2. Make sure all image references are relative paths, for example:
-   - `images/FC-office-img.jpg`
-   - `images/logo for FC.png`
-3. Copy the image folder to pfSense. Use SCP, SFTP, or the pfSense shell to create and populate `/usr/local/captiveportal/images/`.
-4. In the pfSense web GUI, go to `Services > Captive Portal`.
-5. Select the captive portal zone you want to customize.
-6. Under the portal page settings, paste the contents of `login.html` into the `Portal page contents` field or use the file upload button if available.
-7. For custom error or logout pages, upload or paste `error.html` and `logout.html` into the corresponding page content fields.
-8. Save changes and test the captive portal from a client device.
+- click ```Next```
 
-### Notes
+![alt text](./images/pfsense-config-wizard-pt2.png)
 
-- If pfSense does not allow direct image upload in the portal settings, uploading the image files to `/usr/local/captiveportal/images/` is the standard method.
-- Use relative paths in the HTML so the pages load correctly from the captive portal directory.
-- If you prefer a single file deploy, consider converting small images to base64 data URIs inside the HTML.
+- click ```Next```
+
+### General information section
+ - leave the hostname as the default
+   - if you have something custom you can enter it eg ```fortifycontinuum```
+- leave the Domain-name as the default
+   - if you have something custom you can also enter it eg NW.firewall.
+
+![alt text](./images/pfsense-config-wizard-pt3.png)
+
+- leave the Primary and Secondary DNS as is (Blank), can be configure later if needed.
+
+![alt text](./images/pfsense-config-wizard-pt3(DNs).png) 
+- Click ```next```
+
+### Time Server section
+![alt text](./images/pfsense-config-wizard-time.png) 
+- Click ```next```
+
+### Configure WAN interface
+  
+  The WAN aka Wide area network is responsible for recieving internet from the ISP (Internet Sevice provider).
+
+ ![alt text](./images/pfsense-config-wizard-pt4-WAN.png)
+
+- leave the configuration Type as "DHCP"
+   - This should be only set to static if you and your ISP has agreed upon a specific IP that will be used to deliver internet to your Enterprise
+
+- Leave all other as is 
+
+- Check Both options in the RFC section
+
+![alt text](./images/pfsense-config-wizard-pt4-WAN-pt2.png)
+
+- Click Next
+ 
+### Configure LAN interface
+ This section is where device would be connected and be able to recieve internet connection.
+
+![alt text](./images/pfsense-config-wizard-pt4-LAN.png)
+
+- leave as is 
+
+- click Next
+
+### Setting A New Admin Password
+
+![alt text](./images/pfsense-config-wizard-password.png)
+
+- set a new admin password
+   - This is important even in a homelab like this as default password also leads to breaches in actual enterprise enviroment, practice make perfect.
+
+- Click Next
+
+###  Reload to save configuration
+
+![alt text](./images/pfsense-config-wizard-reload.png)
+
+
+- Click Reload 
+
+### Wizard Complete
+
+![alt text](./images/pfsense-config-completion.png)
+
+- click Finish
+
+### Dashboard
+
+![alt text](./images/pfsense-Dashboard.png)
+
+#### PFsense Configuration Completed
+   Congrats, with this the Firewall is up and running but more configuration is needed for the best security, configs like
+
+   - Vlan Segmentation
+   - Captive Portal
+   - Bandwith control
+   - firewall rules
+   - Content-filtering 
+   - and more ....
+
+

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'> 
+  <link rel="icon" href="./images/Ico for FC.png" type="image/x-icon">
+  <title>Fortify Continuum</title>
+
+  <style>
+    body {
+           background-image: url('./images/FC-office-img.jpg');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;
+           font-family: monospace;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           min-height: 100vh;
+           margin: 0;
+           padding: 2rem;
+           box-sizing: border-box;
+           color: #f2f6ff;
+        }
+
+    .wrapper {
+           display: flex;
+           align-items: flex-start;
+           justify-content: center;
+           gap: 2rem;
+           width: 100%;
+           max-width: 1120px;
+           flex-wrap: wrap;
+        }
+
+    .greeting {
+         margin-top:20rem;
+         margin-right: 4rem;
+         max-width: 440px;
+         color: #ffffff;
+         text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .box {
+        flex: 0 1 420px;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        width: min(420px, 100%);
+        padding: 5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        box-sizing: border-box;
+    }
+
+    .box img {
+        width: 100%;
+        max-width: 140px;
+        display: block;
+        margin: 0 auto 1.25rem;
+    }
+
+    .name {
+         color:#f2f6ff;
+         margin-top:1rem;
+         font-size:1rem;
+         text-align: center;
+         text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+         }
+
+    .button { width:100%; 
+             padding:.85rem; 
+             background:#1479d5;
+            color:#ffffff;
+             border:none; 
+             border-radius:6px; 
+             font-weight:bold;
+             font-size:1rem; 
+             cursor:pointer; }
+    .button:hover {
+        background: #0f69c2;
+    }
+    .note { font-size:.75rem; 
+            color:#f2f6ff; 
+            margin-top:1rem;
+            text-align: center; 
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+        }
+    .conditions { 
+        color:#88c0ff; 
+        text-decoration:underline; 
+        text-decoration-color:#88c0ff;
+        cursor:pointer;
+        }
+    .company.name {
+        color:#1479d5;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: bold;
+        font-family: 'Ubuntu', sans-serif;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.65);
+    }  
+    .username {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+.statusTitle {
+      font-size: 20px;
+      color: #2d6a4f;
+      margin-bottom: 10px;
+      text-align:center;
+    }
+
+.statusTitle2 {
+      font-size: 20px;
+      color: #cf2418;
+      margin-bottom: 10px;
+      text-align:center;
+    }
+
+    .logout-btn, .reconnect-btn {
+      width: 100%;  
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      color: #fff;
+    }
+    .logout-btn { background-color: #e63946; }
+    .logout-btn:hover { background-color: #d62839; }
+    .reconnect-btn { background-color: #2d6a4f; }
+    .reconnect-btn:hover { background-color: #1b4332; }
+    .timestamp {
+      font-size: 13px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+        body {
+            padding: 1.5rem;
+        }
+
+        .wrapper {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .greeting {
+            margin-top: 0rem;
+            max-width: 100%;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 1rem;
+        }
+
+        .box {
+            width: 100%;
+            padding: 1.25rem;
+        }
+
+        .button {
+            padding: 0.8rem;
+        }
+        .greeting {
+            margin-top: 0rem;
+            text-align: center;
+            max-width: 100%;
+            margin-left: 12vw;
+        }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="greeting">
+      <h1>Welcome to <br>
+           <span class="company name">Fortify Continuum</span></h1>
+      <p>By connecting, you are agreeing to our <span class="conditions">Terms&Conditions</span></p>
+    </div>
+    <div class='box'>
+    <img src=./images/logo%20for%20FC.png>
+    <h2 class='name'>Staff Access</h2>
+    <h1 class="statusTitle">Access Granted</h1>
+     <div class="username" id="statusUser">
+      Welcome, <b><?=$username ?? $voucher;?></b> <br/>
+        You are currently logged in.<br/>
+        Have a productive day! <br/>
+    </div>
+    <form id="logoutForm" method="POST" action="<?=$logouturl;?>">
+      <input name="logout_id" type="hidden" value="<?=$sessionid;?>" />
+      <input name="zone" type="hidden" value="<?=$cpzone;?>" />
+      <input name="logout" type="submit" value="Logout" class="logout-btn" />
+    </form>
+
+    <div id="logoutMessage" style="display:none;">
+      <h1 class="statusTitle2">Access Terminated</h1>
+      <div class="username">
+        Disconnected account: <b><?=$username ?? $voucher;?></b><br/>
+        Thank you for using our service.
+      </div>
+      <div class="timestamp" id="logoutTime"></div>
+        <button class="reconnect-btn" id="reconnectBtn" style="display:none;">Reconnect</button>
+    </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // Open the intended destination in a new tab
+    window.open("<?=$my_redirurl;?>", "_blank");
+
+    // Handle logout form submission
+    document.getElementById("logoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      fetch("<?=$logouturl;?>", {
+        method: "POST",
+        body: new FormData(this)
+      }).then(() => {
+        // Hide logout form
+        document.getElementById("logoutForm").style.display = "none";
+        // Change to logout view
+        document.getElementById("statusIcon").style.display = "none";
+        document.getElementById("statusTitle").style.display = "none";
+        document.getElementById("statusUser").style.display = "none";
+        document.getElementById("logoutMessage").style.display = "block";
+        document.getElementById("reconnectBtn").style.display = "inline-block";
+
+        // Add timestamp
+        const now = new Date();
+        document.getElementById("logoutTime").innerText = 
+          "Logged out at " + now.toLocaleTimeString();
+      });
+    });
+
+    // Handle reconnect button click
+    document.getElementById("reconnectBtn").addEventListener("click", function() {
+      window.location.href = "<?=$loginurl;?>"; // replace with your login/voucher page
+    });
+  </script>
+</body>
+</html>

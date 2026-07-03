@@ -1,144 +1,64 @@
-# Fortify Continuum Captive Portal Setup
+# Fortify Continuum Captive Portal
 
-A Captive portal is an important part of Network access control in an Enterprise environment. Users connecting to the network need to authorize with credentials like username and password or voucher codes to access network services.
+This folder contains the custom Fortify Continuum captive portal pages used for staff access. The pages are designed with a branded office background, translucent glass-style form panels, and responsive layouts for desktop and mobile.
 
----
-### Prerequisites  
+## Files
 
-- pfSense installed
-- pfSense VLAN created
+- `login.html` — Login page for staff access.
+- `error.html` — Error page showing login or voucher failures.
+- `logout.html` — Logout/connected status page.
+- `images/` — Local image assets used by the portal pages.
+- `Readme.md` — This file.
 
-### Set-up 
+## Captive portal view
+   - Login page
+   ![Login page](<./images/login page.png>)
 
-- Login to your pfSense dashboard
-- Click on the menu 
-- Click on ```Service```
-- Click on ```Captive Portal```
+   - Error page
+    ![Error page](<./images/error page.png>) 
 
-![pfSense Services menu with Captive Portal option highlighted](./images/THcon-Captive-portal-config-pt1.png)
+   - Logout page
+   ![Logout page](<./images/logout page.png>)
 
-- Click on Add 
+## Features
 
-![Captive Portal zones list with Add button](./images/THcon-Captive-portal-config-pt2.png)
+- Background uses `images/FC-office-img.jpg` for a branded look.
+- Transparent translucent form panel with blur effect.
+- Responsive layout: pages stack for smaller screens and show side-by-side content on desktop.
+- Consistent branding across login, error, and logout flows.
 
-- Enter a Zone name eg Human_Res
-- Enter a Zone Description eg Zone for Human-Res staff
-- Click ```Save and Continue```
+## Notes
 
-![Captive Portal zone creation form with name and description fields](./images/THcon-Captive-portal-config-pt3(zozne-name).png) 
+- The pages currently use inline CSS inside each HTML file.
+- Each Zone will require its own 3 file for thier zones.
+- The `login.html` form posts to the captive portal authentication endpoint.
+- The `logout.html` page includes logout behavior and a reconnect flow.
 
-- Check "Enable Captive Portal"
-- In Interface, select "HumanRes"
+## Customization
 
-PS
-- Also do this for the LAN interface you are currently connected to.
+To adapt the portal for another zone or design:
 
-pfSense has done a good job in telling us what each feature does. Remember that Enterprise environments differ, so what you are doing should suit yours.
+1. Update the background image in `background-image: url('images/FC-office-img.jpg')`.
+2. Change the brand logo path and text inside each HTML file.
+3. Adjust the form action URL in `login.html` and the redirect logic in `logout.html`.
+4. Update colors, spacing, or fonts in the inline `<style>` sections.
 
-![Captive Portal settings with Enable option and HumanRes interface selected](./images/THcon-Captive-portal-config-pt3-enabing-interface.png)
+## Uploading to pfSense Captive Portal
 
-- Set Idle Timeout: 30 
-- Check "Logout Pop-up Window"
-- After Authentication URL: https://www.google.com
-- Check "Preserve User Database"
-- Leave Concurrent Connection as is
-- Check "Enable Per-user Bandwidth Restriction"
-- Set Default Download: 1024kbit/s (aka 1mbps)
-- Set Default Upload: 1024kbit/s (aka 1mbps)
-- Leave the Authentication Method as is 
-- Select "Local Database" for Authentication Server
-- Select "Local Database" for Secondary Authentication Server
-- Click on Save
-- Repeat for all the VLAN segments
+1. Prepare the HTML and image assets locally.
+2. Make sure all image references are relative paths, for example:
+   - `images/FC-office-img.jpg`
+   - `images/logo for FC.png`
+3. Copy the image folder to pfSense. Use SCP, SFTP, or the pfSense shell to create and populate `/usr/local/captiveportal/images/`.
+4. In the pfSense web GUI, go to `Services > Captive Portal`.
+5. Select the captive portal zone you want to customize.
+6. Under the portal page settings, paste the contents of `login.html` into the `Portal page contents` field or use the file upload button if available.
+7. For custom error or logout pages, upload or paste `error.html` and `logout.html` into the corresponding page content fields.
+8. Save changes and test the captive portal from a client device.
 
-![Captive Portal zones overview showing all configured zones](./images/THcon-Captive-portal-Zones.png)
+### Notes
 
-### Creating User Accounts for the Different Segments
+- If pfSense does not allow direct image upload in the portal settings, uploading the image files to `/usr/local/captiveportal/images/` is the standard method.
+- Use relative paths in the HTML so the pages load correctly from the captive portal directory.
+- If you prefer a single file deploy, consider converting small images to base64 data URIs inside the HTML.
 
-- Click on the menu
-- Click on System
-- Click on User Manager
-
-![System menu with User Manager option selected](./images/THcon-Captive-portal-user-config.png)
-
-First we create groups 
-
-- Click on ```Groups```
-   - Groups simply help to apply configs to all user added to this group instead of doing it one by one
-- Click on ```Add```
-
-![User Manager interface showing Groups tab with Add button](./images/THcon-Captive-portal-user-config-pt2.png) 
-
-- Enter a Group Name
-- Enter a Description
-
-![Group creation form with name and description fields](./images/THcon-Captive-portal-user-config-pt3.png) 
-
-
-- In the assigned privilegedes section
-- click on Add
-  - this is important, without this the user accounts created would be denied access and or rejected
-- select User-Service : Captive Portal
-
-![Assiginng privilegedes to the different groups](./images/THcon-Captive-portal-Group-privilegdes.png)
-
-- click on Save
-
-- Do this for all others
-
-![Multiple user groups displayed in the Groups list](./images/THcon-Captive-portal-user-config-pt4.png)
-
-Now let's create user accounts for users in our Enterprise:
-- Victoria Dane - Accounting
-- Doris Madison - Human-Res
-- Tolu Anderson - Underwriter
-
-### Creating User Accounts
-
-- Click on User
-- Click on Add
-- Enter Username
-- Enter Password
-- Enter Full Name
-
-![User account creation form with username, password, and full name fields](./images/THcon-Captive-portal-user-account-creation.png)
-
-
-Make sure to add the user as a member of the right groups
-
-- By selecting it and clicking on "Move to Members List"
-
-![User group assignment interface showing available and member groups](./images/THcon-Captive-portal-user-account-creation-pt2.png)
-
-- And repeat for the other users
-
-![User account list showing all created user accounts with their assigned groups](./images/THcon-Captive-portal-user-account-display.png)
-
-With all that done you should see this appear in  your browser  
-
-![PFsense defualt Captive-portal page](./images/captive-portal-page.png)
-
-### Confirmation
-
- Now lets Test the user account created, using anyone of the authenticatin methods 
-
- #### Before login
-
-![Captive-portal-before-login](./images/THcon-Captive-portal-before-login.png)
-
- #### After login
-
-![Captive-portal-after-login](./images/THcon-Captive-portal-after-login.png)
-
- you see the logout pop up windows
-
- #### Captive portal  Access logs
-
- - Click on the menu 
- - click on status 
- - click on captive portal 
- - selct the zone
- - you see who is logged in 
-
-
-![success-login](./images/success-login.png)  
