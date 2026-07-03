@@ -11,7 +11,7 @@ Currently the pfSense instance in this lab is on a flat network: any host can op
 
 ## Prerequisites
 
-- pfSense basic setup completed (see: [pfSense firewall config](https://github.com/eth-hac-steven/Threatsphere-Consulting-Network-infrastructure/tree/main/Threatsphere%20PFsense%20Firewall%20config))
+- pfSense basic setup completed (see: [pfSense firewall config](https://github.com/eth-hac-steven/Threatsphere-Consulting-Network-infrastructure/tree/main/Fortify%20Continuum%20PFsense%20Firewall%20config))
 - A Windows PC for testing (optional)
 
 ## VLAN Setup
@@ -104,4 +104,4 @@ If you'd like, I can also:
 - Rename image files to cleaner, lowercase names (and update README accordingly),
 - Or create a small index or gallery for the images.
 
-Tell me which of the image tasks you'd like me to perform next: compress (lossy/lossless), rename, or both. If you want compression, tell me the target max file size or quality level (e.g., 60% quality, or max 100 KB per image).
+Tell me which of the image tasks you'd like me to perform next: compress (lossy/lossless), rename, or both. If you want compression, tell me the target max file size or quality level (e.g., 60% quality).
