@@ -1,4 +1,4 @@
-# Threatsphere Firewall configuration
+# Fortify Continuum Firewall configuration
 
 ##  Prerequisites
   - virtualbox 😃/VM ware ☹️
@@ -52,7 +52,7 @@ like the screenshot says the ```wizard provides guidance through the initial con
 
 ### General information section
  - leave the hostname as the default
-   - if you have something custom you can enter it eg ```threatspherecon```
+   - if you have something custom you can enter it eg ```fortifycontinuum```
 - leave the Domain-name as the default
    - if you have something custom you can also enter it eg NW.firewall.
 
@@ -128,5 +128,4 @@ like the screenshot says the ```wizard provides guidance through the initial con
    - firewall rules
    - Content-filtering 
    - and more ....
-
 
